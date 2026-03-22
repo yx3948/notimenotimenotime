@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>抢</title>
+  <title>NO TIME</title>
   <style>
 
     @font-face {
@@ -24,6 +24,26 @@
       cursor: crosshair;
     }
 
+    #bottombar{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index:9999;
+      background-color: black;
+    }
+
+    #countdown {
+      position: fixed;
+      bottom: -2vh;
+      right: 45vw;
+
+      color: rgb(255, 0, 0);
+      font-size: 90px;
+      z-index: 99999;
+}
+
     .backdrop {
       position: fixed;
       color:rgb(177, 177, 177);
@@ -33,16 +53,16 @@
       width: 100vw;
       line-height: 0.9;
       /* opacity: 0.15; */
-      animation: slide 20s linear infinite;
+      /* animation: slide 20s linear infinite; */
     }
 
   </style>
 </head>
 <body>
+ <div id = "bottombar"></div>
+<div class="backdrop"></div>
+<div id="countdown">5:00</div>
 
-  <div class="backdrop">JFK KSPO-DOME LHR WUKESONG-ARENA PETRA KYOTO SYX BROOKLYN-PARAMOUNT PARIS
-     CGO GRAMERCY-THEATRE TAIPEI GOCHEOK-SKY-DOME LISBON PUERTO-RICO NRT CDG SHANGHAI BALI
-    JAMSIL-SPORTS-COMPLEX STOCKHOLM DXB CHIANG-MAI DAX SEOUL LAX BIG-LOTUS SIN SYD WATER-CUBE PVG HONG-KONG ICN </div>
-
+<script src="script.js"></script>
 </body>
 </html>
