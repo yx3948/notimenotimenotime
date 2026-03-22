@@ -1,7 +1,6 @@
 let count = 180;
 document.getElementById("countdown").innerHTML = "3:00";
 
-
 const places = [
   "JFK", "KSPO-DOME", "LHR", "WUKESONG-ARENA", "PETRA", "DEADVLEI",
   "THE-LOUVRE", "KYOTO", "SYX", "BROOKLYN-PARAMOUNT", "PARIS",
@@ -10,12 +9,19 @@ const places = [
   "NRT", "CDG", "SHANGHAI", "BALI", "JAMSIL-SPORTS-COMPLEX",
   "STOCKHOLM", "DXB", "SAHARA-DESERT", "CHIANG-MAI", "SEOUL",
   "MERZOUGA", "LAX", "BIG-LOTUS-STADIUM", "SIN", "TAJ-MAHAL",
-  "SYD", "WATER-CUBE", "PVG", "HONG-KONG", "ICN", "BUDAPEST","BIRD'S-NEST"
+  "SYD", "WATER-CUBE", "PVG", "HONG-KONG", "ICN", "BUDAPEST", "BIRD'S-NEST"
 ];
 
-const text = places.join("  ");
+function updateBackdrop() {
+  const spans = places.map(function(p, i) {
+    return '<span id="place-' + i + '">' + p + '</span>';
+  });
+  const text = spans.join("  ");
+  backdrop.innerHTML = text + "  " + text;
+}
+
 const backdrop = document.querySelector(".backdrop");
-backdrop.innerHTML = text + "  " + text;
+updateBackdrop();
 
 let posY = 0;
 window.addEventListener("wheel", function(e) {
@@ -26,18 +32,20 @@ window.addEventListener("wheel", function(e) {
   backdrop.style.transform = "translateY(" + posY + "px)";
 });
 
-
 setInterval(function() {
   count = count - 1;
+
+if (count <= 0) {
+  count = 180;
+  const randomIndex = Math.floor(Math.random() * places.length);
+  document.querySelectorAll("#place-" + randomIndex).forEach(function(el) {
+    el.style.color = "black";
+  });
+}
+
   let minutes = Math.floor(count / 60);
   let seconds = count % 60;
-  
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-
+  if (seconds < 10) { seconds = "0" + seconds; }
+  if (minutes < 10) { minutes = "0" + minutes; }
   document.getElementById("countdown").innerHTML = minutes + ":" + seconds;
 }, 100);
