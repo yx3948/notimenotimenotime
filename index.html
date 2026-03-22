@@ -1,18 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>抢</title>
+  <style>
 
-    <title>Sketch</title>
+    @font-face {
+      font-family: 'Kalice';
+      src: url('Kalice-Regular.ttf');
+    }
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    @font-face {
+      font-family: 'Kalice';
+      src: url('Kalice-Italic.ttf');
+      font-style: italic;
+    }
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-  </head>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Kalice', serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
 
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+    .backdrop {
+      position: fixed;
+      white-space: nowrap;
+      font-size: 14px;
+      opacity: 0.15;
+      animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="backdrop" style="top:40vh;">
+    sold out · queue position 2847 · session expires · please do not refresh · sold out · queue position 2847 · session expires · please do not refresh ·
+  </div>
+
+</body>
 </html>
