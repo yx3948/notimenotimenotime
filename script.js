@@ -1,5 +1,26 @@
-let count = 180;
-document.getElementById("countdown").innerHTML = "3:00";
+let clickCount = 0;
+
+const messages = [
+  "<em>THERE'S NO TIME NO TIME NO TIME.</em>",
+  "<em>Did you get everything???</em>",
+  "<em>Please don't MISS OUT.</em>"
+];
+
+document.addEventListener("click", function() {
+  clickCount++;
+
+  if (clickCount < 20) {
+    document.getElementById("message").innerHTML = messages[clickCount % 3];
+  }
+
+  if (clickCount === 20) {
+    document.getElementById("message").style.display = "none";
+    document.getElementById("countdown").style.visibility = "visible";
+  }
+});
+
+let count = 120;
+document.getElementById("countdown").innerHTML = "2:00";
 
 const places = [
   "JFK", "KSPO-DOME", "LHR", "WUKESONG-ARENA", "PETRA", "DEADVLEI",
@@ -9,7 +30,7 @@ const places = [
   "NRT", "CDG", "SHANGHAI", "BALI", "JAMSIL-SPORTS-COMPLEX",
   "STOCKHOLM", "DXB", "SAHARA-DESERT", "CHIANG-MAI", "SEOUL",
   "MERZOUGA", "LAX", "BIG-LOTUS-STADIUM", "SIN", "TAJ-MAHAL",
-  "SYD", "WATER-CUBE", "PVG", "HONG-KONG", "ICN", "BUDAPEST", "BIRD'S-NEST"
+  "SYD", "WATER-CUBE-ARENA", "PVG", "HONG-KONG", "ICN", "BUDAPEST", "BIRD'S-NEST"
 ];
 
 function updateBackdrop() {
@@ -34,15 +55,15 @@ window.addEventListener("wheel", function(e) {
 
 setInterval(function() {
   count = count - 1;
-
-if (count <= 0) {
-  count = 180;
-  const randomIndex = Math.floor(Math.random() * places.length);
-  document.querySelectorAll("#place-" + randomIndex).forEach(function(el) {
-    el.style.color = "black";
-  });
-}
-
+  if (count <= 0) {
+    count = 120;
+    if (clickCount >= 20) {
+      const randomIndex = Math.floor(Math.random() * places.length);
+      document.querySelectorAll("#place-" + randomIndex).forEach(function(el) {
+        el.style.color = "black";
+      });
+    }
+  }
   let minutes = Math.floor(count / 60);
   let seconds = count % 60;
   if (seconds < 10) { seconds = "0" + seconds; }
