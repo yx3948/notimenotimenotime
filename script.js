@@ -2,15 +2,17 @@ let clickCount = 0;
 
 const messages = [
   "<em>THERE'S NO TIME NO TIME NO TIME.</em>",
-  "<em>Did you get everything???</em>",
-  "<em>Please don't MISS OUT.</em>"
+  "<em>Did you get everything?????</em>",
+  "<em>Oh, there's more.</em>",
+  "<em>Please don't MISS OUT.</em>",
+  "<em>THERE ARE always MORE!</em>"
 ];
 
 document.addEventListener("click", function() {
   clickCount++;
 
   if (clickCount < 20) {
-    document.getElementById("message").innerHTML = messages[clickCount % 3];
+    document.getElementById("message").innerHTML = messages[clickCount % 5];
   }
 
   if (clickCount === 20) {
@@ -19,7 +21,7 @@ document.addEventListener("click", function() {
   }
 });
 
-let count = 120;
+let count = 60;
 document.getElementById("countdown").innerHTML = "2:00";
 
 const places = [
@@ -56,7 +58,7 @@ window.addEventListener("wheel", function(e) {
 setInterval(function() {
   count = count - 1;
   if (count <= 0) {
-    count = 120;
+    count = 60;
     if (clickCount >= 20) {
       const randomIndex = Math.floor(Math.random() * places.length);
       document.querySelectorAll("#place-" + randomIndex).forEach(function(el) {
