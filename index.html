@@ -36,9 +36,11 @@
 
       #message {
      position: fixed;
-     width:90vw;
+     /* width:90vw; */
       bottom: 1vh;
-      left:2vw;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
       text-align: center;
       color: rgb(255, 0, 0);
       font-size: 60px;
@@ -75,6 +77,8 @@
     .popup {
       position: fixed;
       cursor:progress;
+      overflow: hidden;
+      word-break: break-word;
      width: 40vw;
      height: 20vh;
      background: black;
@@ -90,7 +94,7 @@
  <div id = "bottombar"></div>
  <div class="backdrop"></div>
  <div id="countdown">1:00</div>
- <div id="message"><em>THERE'S NO TIME NO TIME NO TIME.</em></div>
+ <div id="message"><em>The memories you didn't make are the ones that haunt you.</em></div>
 <div id="popup">
   <div id="popup-content"></div>
 </div>
