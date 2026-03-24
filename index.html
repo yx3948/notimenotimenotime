@@ -1,104 +1,133 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>NO TIME</title>
-  <style>
-
-    @font-face {
-      font-family: 'Kalice';
-      src: url('Kalice-Regular.ttf');
-    }
-
-    @font-face {
-      font-family: 'Kalice';
-      src: url('Kalice-Italic.ttf');
-      font-style: italic;
-    }
-
-    body {
-      background-color: black;
-      color: white;
-      font-family: 'Kalice', serif;
-      overflow-x: hidden;
-      cursor: crosshair;
-    }
-
-    #bottombar{
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      z-index:9999;
-      background-color: black;
-    }
-
-      #message {
-     position: fixed;
-     /* width:90vw; */
-      bottom: 1vh;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      text-align: center;
-      color: rgb(255, 0, 0);
-      font-size: 60px;
-      z-index: 99999;
-    }
-
-      #countdown {
-     visibility: hidden;
-    }
-      #countdown {
-      position: fixed;
-      bottom: -2vh;
-      right: 45vw;
-      color: rgb(255, 0, 0);
-      font-size: 90px;
-      z-index: 99999;
+<meta charset="UTF-8">
+<title>NO TIME</title>
+<style>
+@font-face {
+  font-family: 'Kalice';
+  src: url('Kalice-Regular.ttf');
+}
+@font-face {
+  font-family: 'Kalice';
+  src: url('Kalice-Italic.ttf');
+  font-style: italic;
+}
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Kalice', serif;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+#bottombar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 100;
+  background-color: black;
+}
+#message {
+  position: fixed;
+  bottom: 1vh;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+  color: rgb(255, 0, 0);
+  font-size: 60px;
+  z-index: 200;
+}
+#countdown {
+  position: fixed;
+  bottom: -2vh;
+  right: 45vw;
+  color: rgb(255, 0, 0);
+  font-size: 90px;
+  z-index: 201;
+  visibility: hidden;
+}
+.backdrop {
+  position: fixed;
+  left: 0;
+  color: rgb(177, 177, 177);
+  font-size: 90px;
+  text-align: justify;
+  width: 96vw;
+  line-height: 0.9;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+.place-word:hover {
+  text-shadow: 0px 0px 6px rgba(177, 177, 177, 1);
+}
+.popup {
+  position: fixed;
+  cursor: progress;
+  overflow: hidden;
+  word-break: break-word;
+  width: 40vw;
+  height: 25vh;
+  background: black;
+  border: 1px solid white;
+  color: rgb(177, 177, 177);
+  font-size: 20px;
+  z-index: 1000;
+  padding: 20px;
 }
 
-    .backdrop {
-      position: fixed;
-      left:0;
-      color:rgb(177, 177, 177);
-      /* white-space: nowrap; */
-      font-size: 90px;
-      text-align: justify;
-      width: 96vw;
-      line-height: 0.9;
-      padding-left: 2vw;
-      padding-right: 2vw;
-      /* opacity: 0.15; */
-      /* animation: slide 20s linear infinite; */
-    }
-
-    .popup {
-      position: fixed;
-      cursor:progress;
-      overflow: hidden;
-      word-break: break-word;
-     width: 40vw;
-     height: 20vh;
-     background: black;
-     border: 1px solid white;
-     color: white;
-     font-size: 20px;
-     z-index: 999999;
-     padding: 20px;
+.popup-btn {
+  background: black;
+  color: rgb(177, 177, 177);
+  border: 1px solid rgb(177, 177, 177);
+  font-family: 'Kalice', serif;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: progress;
+  padding: 4px 12px;
+  margin-right: 10px;
 }
-  </style>
+
+.popup-input {
+  background: black;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  font-family: 'Kalice', serif;
+  font-size: 16px;
+  width: 120px;
+  outline: none;
+}
+/* #mobileblock {
+  display: none;
+}
+@media(max-width:600px){
+  #mobileblock {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: rgb(177, 177, 177);
+    font-size: 30px;
+    text-align: center;
+    line-height: 0.9;
+    z-index: 999999999;
+  }
+} */
+</style>
 </head>
 <body>
- <div id = "bottombar"></div>
- <div class="backdrop"></div>
- <div id="countdown">1:00</div>
- <div id="message"><em>The memories you didn't make are the ones that haunt you.</em></div>
-<div id="popup">
-  <div id="popup-content"></div>
-</div>
-
+<!-- <div id="mobileblock">Please use your laptop to catch up,<br>there's clearly no time.</div> -->
+<div id="bottombar"></div>
+<div class="backdrop"></div>
+<div id="countdown">1:00</div>
+<div id="message"><em>The memories you didn't make are the ones that haunt you.</em></div>
+<div id="popup"><div id="popup-content"></div></div>
 <script src="script.js"></script>
 </body>
 </html>
