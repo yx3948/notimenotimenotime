@@ -13,9 +13,9 @@ const places = [
 
 const categories = {
   airport: ["JFK", "LHR", "SYX", "NRT", "CDG", "DXB", "LAX", "SIN", "SYD", "PVG", "ICN", "CGO"],
-  venue: ["KSPO-DOME", "WUKESONG-ARENA", "BROOKLYN-PARAMOUNT", "GRAMERCY-THEATRE", "BIG-BEN",
+  venue: ["KSPO-DOME", "WUKESONG-ARENA", "BROOKLYN-PARAMOUNT", "GRAMERCY-THEATRE",
     "GOCHEOK-SKY-DOME", "JAMSIL-SPORTS-COMPLEX", "BIG-LOTUS-STADIUM", "WATER-CUBE-ARENA", "BIRD'S-NEST"],
-  place: ["PETRA", "DEADVLEI", "SERENGETI", "GREAT-SPHINX", "SAHARA-DESERT", "TAJ-MAHAL",
+  place: ["PETRA", "THE-LOUVRE", "DEADVLEI", "SERENGETI", "GREAT-SPHINX", "SAHARA-DESERT", "TAJ-MAHAL", "BIG-BEN",
     "MERZOUGA", "KYOTO", "PARIS", "TAIPEI", "LISBON", "PUERTO-RICO", "SHANGHAI", "BALI", "STOCKHOLM",
     "CHIANG-MAI", "SEOUL", "HONG-KONG", "REYNISFJARA", "BUDAPEST"],
   singer: ["SHAN-YICHUN", "IVE", "RED-VELVET", "YOASOBI", "UTAKA-OZAKI",
@@ -52,7 +52,7 @@ const placePopup = `
   <div>BAGGAGE: <input class="popup-input" type="text"></div>
   <div>TRAVEL INSURANCE: <input class="popup-input" type="text"></div>
   <div>SPECIAL ASSISTANCE: <input class="popup-input" type="text"></div>
-  <br>
+  <br><br><br>
   <button class="popup-btn" onclick="this.style.color='white'; this.innerHTML='LOADING...'">SUBMIT</button>
 `;
 
@@ -65,7 +65,7 @@ function airportPopup() {
     <div>DRIVE TO AIRPORT: <span style="color:white;">${drive} </span>MIN</div>
     <div>FLIGHT STATUS: <span style="color:white;">POSSIBLE DELAYS</span></div>
     <div>SECURITY WAIT: <span style="color:white;">~${security} </span>MIN</div>
-    <div>GATE: <span style="color:white;">TBD</span></div>
+    <div>GATE: <span style="color:white;">TBD</span></div><br>
     <div style="margin-top:10px; display:flex; gap:10px;">
       <button class="popup-btn" onclick="this.style.color='white'; this.innerHTML='LOADING...'">CHECK IN</button>
       <button class="popup-btn" onclick="this.style.color='white'; this.innerHTML='LOADING...'">BOARDING PASS</button>
@@ -74,12 +74,12 @@ function airportPopup() {
 }
 
 
-const popupContent = {
-  // airport: airportPopup(),
-  // venue: "SOLD OUT<br>0 tickets remaining<br>Resale only",
-  // place: "PEAK SEASON<br>No availability<br>Next opening: unknown",
-  singer: "TOUR ANNOUNCED<br>Tickets on sale now<br>Selling fast"
-};
+// const popupContent = {
+//   // airport: airportPopup(),
+//   // venue: "SOLD OUT<br>0 tickets remaining<br>Resale only",
+//   // place: "PEAK SEASON<br>No availability<br>Next opening: unknown",
+//   singer: "TOUR ANNOUNCED<br>Tickets on sale now<br>Selling fast"
+// };
 
 function venuePopup(word) {
   const price1 = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
@@ -100,7 +100,7 @@ function venuePopup(word) {
       if (timeLeft <= 0) {
         clearInterval(interval);
         el.innerHTML = "EXPIRED";
-        el.style.color = "red";
+        el.style.color = "white";
       }
     }, 1000);
   }, 100);
@@ -115,8 +115,56 @@ function venuePopup(word) {
     <div>TICKETS LEFT: <span style="color:white;">${tickets}</span></div>
     <div>${viewers} PEOPLE VIEWING NOW</div>
     <div>OFFER EXPIRES IN: <span style="color:white;" id="${id}">${timeLeft}S</span></div>
+    <br><br><br>
+    <button class="popup-btn" onclick="this.style.color='white'; this.innerHTML='LOADING...'">BUY NOW</button>
+  `;
+}
+
+function singerPopup(word) {
+  const qpos = Math.floor(Math.random() * (50000 - 5000 + 1)) + 5000;
+  const wait = Math.floor(Math.random() * (120 - 20 + 1)) + 20;
+  const barId = "bar-" + Date.now();
+  const qId = "qpos-" + Date.now();
+
+  let progress = 0;
+  setTimeout(function () {
+    const interval = setInterval(function () {
+      const bar = document.getElementById(barId);
+      if (!bar) { clearInterval(interval); return; }
+      progress += Math.random() * 0.3;
+      if (progress > 8) progress = 8;
+      bar.style.width = progress + "%";
+    }, 300);
+  }, 100);
+
+  let currentQ = qpos;
+  setTimeout(function () {
+    const interval = setInterval(function () {
+      const el = document.getElementById(qId);
+      if (!el) { clearInterval(interval); return; }
+      currentQ -= Math.floor(Math.random() * 5);
+      currentQ = Math.max(0, currentQ);
+      el.innerHTML = currentQ.toLocaleString();
+    }, 800);
+  }, 100);
+
+  return `
+    <div><strong>${word}</strong></div><br>
+    <div>QUEUE POSITION: <span style="color:white;" id="${qId}">${qpos.toLocaleString()}</span></div>
+    <div>ESTIMATED WAIT: ~${wait} MIN</div>
+    <div style="margin: 8px 0;">
+      <div style="width:100%; height:4px; background:rgba(255,255,255,0.15);">
+        <div id="${barId}" style="height:4px; background:white; width:0%; transition: width 0.3s ease;"></div>
+      </div>
+    </div>
+  
     <br>
-    <button class="popup-btn" onclick="this.innerHTML='LOADING...'">BUY NOW</button>
+    <div>FAN CLUB BENEFITS</div>
+    <div>· MEET & GREET LOTTERY</div>
+    <div>· LIMITED MERCH ACCESS</div>
+    <div>· EXCLUSIVE SEATING ZONE</div>
+    <br><br>
+    <button class="popup-btn" onclick="this.style.color='white'; this.innerHTML='LOADING...'">JOIN FAN CLUB</button>
   `;
 }
 
@@ -169,10 +217,13 @@ function updateBackdrop() {
           popup.style.scrollbarWidth = "none";
           popup.innerHTML = "<strong>" + word + "</strong><br><br>" + placePopup;
         } else if (cat === "venue") {
-          popup.innerHTML = venuePopup(word);
           popup.style.height = "40vh";
-        } else {
-          popup.innerHTML = "<strong>" + word + "</strong><br><br>" + popupContent[cat];
+          popup.style.width = "30vw";
+          popup.innerHTML = venuePopup(word);
+        } else if (cat === "singer") {
+          popup.style.height = "40vh";
+          popup.style.width = "20vw";
+          popup.innerHTML = singerPopup(word);
         }
         popup.style.top = Math.floor(Math.random() * 70) + "vh";
         popup.style.left = Math.floor(Math.random() * 55) + "vw";
@@ -189,6 +240,7 @@ function updateBackdrop() {
     });
   });
 }
+
 
 updateBackdrop();
 
@@ -210,6 +262,7 @@ let count = 60;
 document.getElementById("countdown").innerHTML = "2:00";
 
 setInterval(function () {
+  if (pauseCountdown) return;
   count = count - 1;
   if (count <= 0) {
     count = 60;
@@ -227,3 +280,65 @@ setInterval(function () {
   if (minutes < 10) { minutes = "0" + minutes; }
   document.getElementById("countdown").innerHTML = minutes + ":" + seconds;
 }, 100);
+
+//reminder
+let redBarShown = false;
+let redBarTriggered = false;
+let pauseCountdown = false;
+let lastRedBar = 0;
+
+function checkPopupCoverage() {
+  const popups = document.querySelectorAll(".popup");
+  let totalArea = 0;
+  const windowArea = window.innerWidth * window.innerHeight;
+
+  popups.forEach(function (p) {
+    totalArea += p.offsetWidth * p.offsetHeight;
+  });
+
+  const now = Date.now();
+  if (totalArea / windowArea >= 0.5 && !redBarShown && now - lastRedBar > 20000) {
+    redBarShown = true;
+    lastRedBar = now;
+    const bar = document.createElement("div");
+    bar.id = "redbar";
+    bar.style.cssText = `
+      position: fixed;
+      bottom: 1vh;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: rgb(255, 0, 0);
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      z-index: 990;
+    `;
+    bar.innerHTML = "take a breath — look left, look right.";
+    document.body.appendChild(bar);
+
+    setTimeout(function () {
+      bar.remove();
+      redBarShown = false;
+      redBarTriggered = true;
+    }, 5000);
+
+    document.addEventListener("mousemove", function (e) {
+      if (!redBarTriggered) return;
+      const leftEdge = window.innerWidth * 0.02;
+      const rightEdge = window.innerWidth * 0.98;
+
+      if (e.clientX < leftEdge || e.clientX > rightEdge) {
+        pauseCountdown = true;
+        redBarTriggered = false;
+        setTimeout(function () {
+          pauseCountdown = false;
+        }, 10000);
+      }
+    });
+  }
+}
+
+setInterval(checkPopupCoverage, 500);

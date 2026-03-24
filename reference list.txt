@@ -3,6 +3,8 @@ code:
 https://stackoverflow.com/questions/34314474/css-infinite-scrolling-div 
 https://www.w3schools.com/css/css_comments.asp
 https://css-tricks.com/almanac/properties/c/cursor/
+https://dev.to/mimafogeus2/randomness-and-random-numbers-in-css-2gfl
+
 
 visual:
 https://v.douyin.com/r1amwVk6JvQ/ 02/26 Vlp:/ m@q.re 
