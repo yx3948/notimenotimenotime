@@ -304,7 +304,7 @@ function checkPopupCoverage() {
     bar.id = "redbar";
     bar.style.cssText = `
       position: fixed;
-      bottom: 1vh;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100px;
@@ -314,7 +314,7 @@ function checkPopupCoverage() {
       align-items: center;
       justify-content: center;
       font-size: 60px;
-      z-index: 990;
+      z-index: 1000000001;
     `;
     bar.innerHTML = "take a breath — look left, look right.";
     document.body.appendChild(bar);
